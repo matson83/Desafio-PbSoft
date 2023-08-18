@@ -100,3 +100,10 @@ table.table .avatar {
 	margin-top: 10px;
 	font-size: 13px;
 }
+
+.custom-btn {
+    background-color: #fa9613;
+    border-color: #fa9613;
+    color: white;
+}
+

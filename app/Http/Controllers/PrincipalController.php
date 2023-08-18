@@ -20,8 +20,10 @@ class PrincipalController extends Controller
         return view('desafio.create');
     }
 
-    public function edit(){
-        return view('desafio.edit');
+    public function show($id){
+        $cadastro = Cadastro::findOrFail($id);
+
+        return view('desafio.show',['cadastro' => $cadastro]);
     }
 
     public function store(Request $request){
@@ -32,10 +34,47 @@ class PrincipalController extends Controller
         $cadastro->data = $request->data;
         $cadastro->cpf_cnpj = $request->cpf_cnpj;
         $cadastro->name_social = $request->name_social;
-        $cadastro->image = $request->image;
+
+
+        if($request->hasFile('image') ** $request->file('image')->isValid()){
+
+            $requestImage = $request->image;
+
+            $complemento = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() .strtotime("agora")) . "." . $complemento;
+
+            $requestImage->move(public_path('img/cadastro') ,$imageName);
+
+            $cadastro->image = $imageName;
+
+        }
 
         $cadastro->save();
 
          return redirect('/');
     }
+
+    public function destroy($id){
+
+        Cadastro::findOrFail($id)->delete();
+
+        return redirect('/');
+    }
+
+    public function edit($id){
+
+       $cadastro = Cadastro::findOrFail($id);
+
+        return view('desafio.edit',['cadastro'=>$cadastro]);
+    }
+
+    public function update(Request $request){
+
+        $cadastro = Cadastro::findOrFail($request->id)->update($request->all());
+
+
+        return redirect('/');
+     }
+
 }

@@ -32,7 +32,7 @@
 				<thead>
 					<tr>
 
-						<th>Imagem</th>
+						<th>Imagem</th><br>
 						<th>CPF / CNPJ</th>
 						<th>Nome</th>
 						<th>Nome Social</th>
@@ -43,14 +43,14 @@
 
 						@foreach ($cadastros as $cadastro)
                         <tr>
-                            <td><img src="img/imagem.png" width="100px" alt=""></td>
+                            <td><img src="img/cadastro/{{$cadastro->image}}" width="100px" alt=""></td>
                             <td>{{$cadastro->cpf_cnpj}}</td>
                             <td>{{$cadastro->name}}</td>
                             <td>{{$cadastro->name_social}}</td>
                             <td>{{$cadastro->data}}</td>
 
                             <td>
-                                <a href="/edit" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" >&#xE254;</i></a>
+                                <a href="/desafio/{{$cadastro->id}}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" >&#xE254;</i></a>
 
                             </td>
 

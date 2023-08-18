@@ -1,63 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Desafio PbSoft</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Desafio PbSoft</title>
 </head>
 <body>
 
-    <main class="page-wrapper mt-4">
-        <div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
-            <div class="row pt-sm-2 pt-lg-0">
-
-                <div class="col-lg-12 pt-4 pb-2 pb-sm-4">
-                    <div class="d-flex align-items-center">
-                        <H1>Edição do {{$cadastro->name}}</H1>
-                    </div><br>
-
-                    <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
-
-                            <form action="/api/app/update/{{/* $eletro->id */}}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="mb-3 container">
-                                    <label class="form-label" for="user_id">Nome do Eletrodomestico:</label>
-                                    <input class="form-control" type="text" name="name" id="name" value="{{ /*$eletro->name*/}}">
-
-                                    <label class="form-label" for="titulo">Descrição:</label>
-                                    <input class="form-control" name="description" id="description" cols="15" rows="10" value="{{/* $eletro->description*/}}">
-
-                                    <br>
-                                    <label class="form-label" for="image">Imagem:</label>
-                                    <input class="form-control-file" type="file" name="image" id="image" value="{{ /*$eletro->image*/}}"><br>
-                                    <img src="/img/eletros/{{/* $eletro->image*/}}" alt="{{/* $eletro->name*/}}" width="300px" height="300px">
-                                    <br>
-                                    <br>
-                                    <label class="form-label" for="regulation">Marca:</label>
-                                    <input class="form-control" type="text" name="marca" id="marca" value="{{ /*$eletro->marca*/}}">
-
-                                    <br>
-                                    <label class="form-label" for="comission">Tensão:</label>
-                                    <input class="form-control" type="text" name="tensaov" id="tensaov" value="{{/* $eletro->tensaov*/}}">
-
-                                    <div class="col-12 d-flex justify-content-end pt-3">
-                                        <button class="btn btn-primary ms-3" type="submit">Editar</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </section>
-                </div>
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-6">
+                <a  class="logo" href="/">
+                    <h2>Pb<b>Soft</b></h2>
+                </a>
             </div>
         </div>
-    </main>
+    </div>
 
+      <div>
+        <ul class="list-group">
+            <li class="list-group-item">Nome : {{$cadastro->name}}  #{{$cadastro->id}}</li>
+            <li class="list-group-item"> CPF ou CNPJ : {{$cadastro->cpf_cnpj}}</li>
+            <li class="list-group-item">Data de Nscimento : {{$cadastro->data}}</li>
+            <li class="list-group-item">Imagem : {{$cadastro->image}}</li>
+            <li class="list-group-item">Nome Social : {{$cadastro->name_social}}</li>
+
+          </ul>
+      </div>
+
+      <div>
+        <a href="/desafio/edit/{{$cadastro->id}}" class="btn btn-primary custom-btn"><span class="material-symbols-outlined">
+            edit
+            </span></a>
+        <form action="/desafio/{{ $cadastro->id }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger delete-btn"><span class="material-symbols-outlined">
+            delete
+            </span></button>
+        </form>
+
+      </div>
 </body>
 </html>
